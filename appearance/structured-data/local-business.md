@@ -1,0 +1,984 @@
+# Local Business (LocalBusiness) Structured Data | Google Search Central
+
+# Local business (`LocalBusiness`) structured data
+
+When users search for businesses on Google Search or Maps, Search results may
+ display a prominent Google knowledge panel with details about a business that matched
+ the query. When users search for a type of business (for example, "best NYC restaurants"), they
+ may see a carousel of businesses related to the query. With Local Business structured data, you
+ can tell Google about business hours, different departments within a business, reviews (if your site captures reviews about other businesses), and more. If you want to help users to make a reservation or place an order
+ directly in Search results, you can use the [Maps Booking API](https://developers.google.com/maps-booking/guides/starter-integration/overview) to enable bookings, payments, and other actions.
+
+## How to add structured data
+
+Structured data is a standardized format for providing information about a page and classifying the page
+ content. If you're new to structured data, you can learn more about [how structured data works](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data).
+
+Here's an overview of how to build, test, and release structured data.
+
+1. Add the required properties . Based on the
+ format you're using, learn where to [insert structured data on the page](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data#format-placement) .
+> [!NOTE]
+> **Using a CMS?**
+>
+> It may be easier to use a plugin that's integrated into your CMS.
+>
+>
+>
+>
+> **Using JavaScript?**
+>
+> Learn how to
+>
+> [generate structured data with JavaScript](https://developers.google.com/search/docs/appearance/structured-data/generate-structured-data-with-javascript)
+>
+> .
+2. Follow the guidelines .
+3. Validate your code using the [Rich Results Test](https://search.google.com/test/rich-results) and fix any critical errors. Consider also fixing any non-critical issues that may be flagged
+ in the tool, as they can help improve the quality of your structured data (however, this isn't necessary to be eligible for rich results).
+4. Deploy a few pages that include your structured data and use the [URL Inspection tool](https://support.google.com/webmasters/answer/9012289) to test how Google sees the page. Be sure that your page is
+ accessible to Google and not blocked by a robots.txt file, the `noindex` tag, or
+ login requirements. If the page looks okay, you can [ask Google to recrawl your URLs](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl) .
+> [!NOTE]
+> **Note**
+>
+> : Allow time for re-crawling and re-indexing. Remember that it
+>  may take several days after publishing a page for Google to find and crawl it.
+5. To keep Google informed of future changes, we recommend that you [submit a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap) . You can automate this with the [Search Console Sitemap API](https://developers.google.com/webmaster-tools/v1/sitemaps) .
+
+## Examples
+
+### Simple local business listing
+
+Here's an example of a local business listing using JSON-LD.
+
+![Local business listing on Google Search](https://developers.google.com/static/search/docs/images/local-business01.png)
+
+> [!NOTE]
+> **Note**
+>
+> : The actual appearance in search results might be different. You can
+>  preview most features with the
+>
+> [Rich Results Test](https://support.google.com/webmasters/answer/7445569)
+>
+> .
+
+<html>
+ <head>
+ <title>Dave's Steak House</title>
+ <script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "Restaurant",
+ "image": ["https://example.com/photos/1x1/photo.jpg",
+ "https://example.com/photos/4x3/photo.jpg",
+ "https://example.com/photos/16x9/photo.jpg"],
+ "name": "Dave's Steak House",
+ "address": {
+ "@type": "PostalAddress",
+ "streetAddress": "148 W 51st St",
+ "addressLocality": "New York",
+ "addressRegion": "NY",
+ "postalCode": "10019",
+ "addressCountry": "US"
+ },
+ "review": {
+ "@type": "Review",
+ "reviewRating": {
+ "@type": "Rating",
+ "ratingValue": 4,
+ "bestRating": 5
+ },
+ "author": {
+ "@type": "Person",
+ "name": "Lillian Ruiz"
+ }
+ },
+ "geo": {
+ "@type": "GeoCoordinates",
+ "latitude": 40.761293,
+ "longitude": -73.982294
+ },
+ "url": "https://www.example.com/restaurant-locations/manhattan",
+ "telephone": "+12122459600",
+ "servesCuisine": "American",
+ "priceRange": "$$$",
+ "openingHoursSpecification": [{
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": ["Monday",
+ "Tuesday"],
+ "opens": "11:30",
+ "closes": "22:00"
+ },
+ {
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": ["Wednesday",
+ "Thursday",
+ "Friday"],
+ "opens": "11:30",
+ "closes": "23:00"
+ },
+ {
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": "Saturday",
+ "opens": "16:00",
+ "closes": "23:00"
+ },
+ {
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": "Sunday",
+ "opens": "16:00",
+ "closes": "22:00"
+ }],
+ "menu": "https://www.example.com/menu"
+ }
+ </script>
+ </head>
+ <body>
+ </body>
+</html>
+
+```
+<html>
+  <head>
+    <title>Dave's Steak House</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "image": [
+        "https://example.com/photos/1x1/photo.jpg",
+        "https://example.com/photos/4x3/photo.jpg",
+        "https://example.com/photos/16x9/photo.jpg"
+       ],
+      "name": "Dave's Steak House",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 W 51st St",
+        "addressLocality": "New York",
+        "addressRegion": "NY",
+        "postalCode": "10019",
+        "addressCountry": "US"
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": 4,
+          "bestRating": 5
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Lillian Ruiz"
+        }
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.761293,
+        "longitude": -73.982294
+      },
+      "url": "https://www.example.com/restaurant-locations/manhattan",
+      "telephone": "+12122459600",
+      "servesCuisine": "American",
+      "priceRange": "$$$",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday"
+          ],
+          "opens": "11:30",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "11:30",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "16:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "16:00",
+          "closes": "22:00"
+        }
+      ],
+      "menu": "https://www.example.com/menu"
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+### Restaurant carousel (limited access)
+
+Here's an example of a restaurant that meets the requirements of a [details page](https://developers.google.com/search/docs/appearance/structured-data/carousel#details-page) (assuming there is also a [summary page](https://developers.google.com/search/docs/appearance/structured-data/carousel#summary-page) with Carousel markup). The Restaurant carousel is limited to a
+ small set of restaurant providers. If you would like to participate, [register your interest](https://docs.google.com/a/google.com/forms/d/e/1FAIpQLSdZCJXAe2TtpiBe8Lx2dWR6LatLcCbFq7SZsyWqH6xJ7ulbaQ/viewform) in our form.
+
+<html>
+ <head>
+ <title>Trattoria Luigi</title>
+ <script type="application/ld+json">
+ {
+ "@context": "https://schema.org/",
+ "@type": "Restaurant",
+ "name": "Trattoria Luigi",
+ "image": ["https://example.com/photos/1x1/photo.jpg",
+ "https://example.com/photos/4x3/photo.jpg",
+ "https://example.com/photos/16x9/photo.jpg"],
+ "priceRange": "$$$",
+ "servesCuisine": "Italian",
+ "telephone": "+12125557234",
+ "address": {
+ "@type": "PostalAddress",
+ "streetAddress": "148 W 51st St",
+ "addressLocality": "New York",
+ "addressRegion": "NY",
+ "postalCode": "10019",
+ "addressCountry": "US"
+ }
+ }
+ </script>
+ </head>
+ <body>
+ </body>
+</html>
+
+```
+<html>
+  <head>
+    <title>Trattoria Luigi</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Restaurant",
+      "name": "Trattoria Luigi",
+      "image": [
+        "https://example.com/photos/1x1/photo.jpg",
+        "https://example.com/photos/4x3/photo.jpg",
+        "https://example.com/photos/16x9/photo.jpg"
+       ],
+       "priceRange": "$$$",
+       "servesCuisine": "Italian",
+       "telephone": "+12125557234",
+       "address": {
+         "@type": "PostalAddress",
+         "streetAddress": "148 W 51st St",
+         "addressLocality": "New York",
+         "addressRegion": "NY",
+         "postalCode": "10019",
+         "addressCountry": "US"
+       }
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+### Business hours
+
+The following examples demonstrate how to mark up different types of business
+ hours.
+
+> [!NOTE]
+> We accept both the official schema.org notation for indicating
+>
+> [dayOfWeek](https://schema.org/OpeningHoursSpecification)
+>
+> (canonical URLs for Monday, Tuesday), as well as a
+>  shorter form being discussed in the schema.org community. We expect
+>  to update this documentation to track the
+>  eventual outcome of those discussions, and to continue to accept both
+>  variations for backwards compatibility.
+
+Standard hours
+
+Excluding the `validFrom` and `validThrough` properties signify that the hours are valid year-round.This example defines a business that is open weekdays from 9am to 9pm, with
+ weekend hours from 10am until 11pm.
+
+```
+"openingHoursSpecification"
+:
+ 
+[
+
+  
+{
+
+    
+"@type"
+:
+ 
+"OpeningHoursSpecification"
+,
+
+    
+"dayOfWeek"
+:
+ 
+[
+
+      
+"Monday"
+,
+
+      
+"Tuesday"
+,
+
+      
+"Wednesday"
+,
+
+      
+"Thursday"
+,
+
+      
+"Friday"
+
+    
+],
+
+    
+"opens"
+:
+ 
+"09:00"
+,
+
+    
+"closes"
+:
+ 
+"21:00"
+
+  
+},
+
+  
+{
+
+    
+"@type"
+:
+ 
+"OpeningHoursSpecification"
+,
+
+    
+"dayOfWeek"
+:
+ 
+[
+
+      
+"Saturday"
+,
+
+      
+"Sunday"
+
+    
+],
+
+    
+"opens"
+:
+ 
+"10:00"
+,
+
+    
+"closes"
+:
+ 
+"23:00"
+
+  
+}
+
+]
+```
+
+Late night hours
+
+For hours past midnight, define opening and closing hours using
+ a single `OpeningHoursSpecification` property. This example defines hours from Saturday
+ at 6pm until Sunday at 3am.
+
+```
+"openingHoursSpecification"
+:
+ 
+{
+
+  
+"@type"
+:
+ 
+"OpeningHoursSpecification"
+,
+
+  
+"dayOfWeek"
+:
+ 
+"Saturday"
+,
+
+  
+"opens"
+:
+ 
+"18:00"
+,
+
+  
+"closes"
+:
+ 
+"03:00"
+
+}
+```
+
+All-day hours
+
+To show a business as open 24 hours a day, set the `open` property to "00:00" and the `closes` property to "23:59".To show a business is closed
+ all day, set both `opens` and `closes` properties to "00:00". This example
+ shows a business open all day Saturday and closed all day Sunday.
+
+```
+"openingHoursSpecification"
+:
+ 
+[
+
+  
+{
+
+    
+"@type"
+:
+ 
+"OpeningHoursSpecification"
+,
+
+    
+"dayOfWeek"
+:
+ 
+"Saturday"
+,
+
+    
+"opens"
+:
+ 
+"00:00"
+,
+
+    
+"closes"
+:
+ 
+"23:59"
+
+  
+},
+
+  
+{
+
+    
+"@type"
+:
+ 
+"OpeningHoursSpecification"
+,
+
+    
+"dayOfWeek"
+:
+ 
+"Sunday"
+,
+
+    
+"opens"
+:
+ 
+"00:00"
+,
+
+    
+"closes"
+:
+ 
+"00:00"
+
+  
+}
+
+]
+```
+
+Seasonal hours
+
+Use both the `validFrom` and `validThrough` properties to define seasonal
+ hours. This example shows a business closed for winter holidays.
+
+```
+"openingHoursSpecification"
+:
+ 
+{
+
+  
+"@type"
+:
+ 
+"OpeningHoursSpecification"
+,
+
+  
+"opens"
+:
+ 
+"00:00"
+,
+
+  
+"closes"
+:
+ 
+"00:00"
+,
+
+  
+"validFrom"
+:
+ 
+"2015-12-23"
+,
+
+  
+"validThrough"
+:
+ 
+"2016-01-05"
+
+}
+```
+
+### Multiple departments
+
+For a business with departments, each with its own distinct properties such
+ as opening hours or telephone numbers, you can mark up the `department` property
+ with an element for each department. Define properties that differ
+ from the main store individually in each respective department element.
+
+<html>
+ <head>
+ <title>Dave's Department Store</title>
+ <script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "Store",
+ "image": ["https://example.com/photos/1x1/photo.jpg",
+ "https://example.com/photos/4x3/photo.jpg",
+ "https://example.com/photos/16x9/photo.jpg"],
+ "name": "Dave's Department Store",
+ "address": {
+ "@type": "PostalAddress",
+ "streetAddress": "1600 Saratoga Ave",
+ "addressLocality": "San Jose",
+ "addressRegion": "CA",
+ "postalCode": "95129",
+ "addressCountry": "US"
+ },
+ "geo": {
+ "@type": "GeoCoordinates",
+ "latitude": 37.293058,
+ "longitude": -121.988331
+ },
+ "url": "https://www.example.com/store-locator/sl/San-Jose-Westgate-Store/1427",
+ "priceRange": "$$$",
+ "telephone": "+14088717984",
+ "openingHoursSpecification": [{
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": ["Monday",
+ "Tuesday",
+ "Wednesday",
+ "Thursday",
+ "Friday",
+ "Saturday"],
+ "opens": "08:00",
+ "closes": "23:59"
+ },
+ {
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": "Sunday",
+ "opens": "08:00",
+ "closes": "23:00"
+ }],
+ "department": [{
+ "@type": "Pharmacy",
+ "image": ["https://example.com/photos/1x1/photo.jpg",
+ "https://example.com/photos/4x3/photo.jpg",
+ "https://example.com/photos/16x9/photo.jpg"],
+ "name": "Dave's Pharmacy",
+ "address": {
+ "@type": "PostalAddress",
+ "streetAddress": "1600 Saratoga Ave",
+ "addressLocality": "San Jose",
+ "addressRegion": "CA",
+ "postalCode": "95129",
+ "addressCountry": "US"
+ },
+ "priceRange": "$",
+ "telephone": "+14088719385",
+ "openingHoursSpecification": [{
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": ["Monday",
+ "Tuesday",
+ "Wednesday",
+ "Thursday",
+ "Friday"],
+ "opens": "09:00",
+ "closes": "19:00"
+ },
+ {
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": "Saturday",
+ "opens": "09:00",
+ "closes": "17:00"
+ },
+ {
+ "@type": "OpeningHoursSpecification",
+ "dayOfWeek": "Sunday",
+ "opens": "11:00",
+ "closes": "17:00"
+ }]
+ }]
+ }
+ </script>
+ </head>
+ <body>
+ </body>
+</html>
+
+```
+<html>
+  <head>
+    <title>Dave's Department Store</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "image": [
+        "https://example.com/photos/1x1/photo.jpg",
+        "https://example.com/photos/4x3/photo.jpg",
+        "https://example.com/photos/16x9/photo.jpg"
+       ],
+      "name": "Dave's Department Store",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1600 Saratoga Ave",
+        "addressLocality": "San Jose",
+        "addressRegion": "CA",
+        "postalCode": "95129",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.293058,
+        "longitude": -121.988331
+      },
+      "url": "https://www.example.com/store-locator/sl/San-Jose-Westgate-Store/1427",
+      "priceRange": "$$$",
+      "telephone": "+14088717984",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "08:00",
+          "closes": "23:59"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "08:00",
+          "closes": "23:00"
+        }
+      ],
+      "department": [
+        {
+          "@type": "Pharmacy",
+          "image": [
+        "https://example.com/photos/1x1/photo.jpg",
+        "https://example.com/photos/4x3/photo.jpg",
+        "https://example.com/photos/16x9/photo.jpg"
+       ],
+          "name": "Dave's Pharmacy",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1600 Saratoga Ave",
+            "addressLocality": "San Jose",
+            "addressRegion": "CA",
+            "postalCode": "95129",
+            "addressCountry": "US"
+          },
+          "priceRange": "$",
+          "telephone": "+14088719385",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "09:00",
+              "closes": "19:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Saturday",
+              "opens": "09:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Sunday",
+              "opens": "11:00",
+              "closes": "17:00"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+## Guidelines
+
+You must follow these guidelines to be eligible to appear in Local Business rich results.
+
+> [!WARNING]
+> **Warning:**
+>
+> If your site violates one or more of these guidelines,
+>  then Google may issue a
+>
+> [manual
+>  action](https://support.google.com/webmasters/answer/2604824)
+>
+> against it. Once you have remedied the problem, you can submit your site for
+>
+> [reconsideration](https://support.google.com/webmasters/answer/35843)
+>
+> .
+
+- [Search Essentials](https://developers.google.com/search/docs/essentials)
+- [General structured data guidelines](https://developers.google.com/search/docs/appearance/structured-data/sd-policies)
+- [Carousel guidelines](https://developers.google.com/search/docs/guides/mark-up-listings) (if applicable). The
+ Restaurant carousel is currently limited to a small set of restaurant providers. If you would
+ like to participate, [register your interest](https://docs.google.com/a/google.com/forms/d/e/1FAIpQLSdZCJXAe2TtpiBe8Lx2dWR6LatLcCbFq7SZsyWqH6xJ7ulbaQ/viewform) in our form.
+
+## Structured data type definitions
+
+The following tables list properties and usage for local business and business
+ action types, based on the full definitions at [schema.org/LocalBusiness](https://schema.org/LocalBusiness).
+
+You must include the required properties for your content to be eligible for display as a rich result.
+ You can also include the recommended properties to add more information about your content,
+ which could provide a better user experience.
+
+You can add `LocalBusiness` structured data to any page on your
+ site, though it may make more sense to put it on a page that contains information about your
+ business.
+
+### `LocalBusiness`
+
+The full definition of `LocalBusiness` is available at [schema.org/LocalBusiness](https://schema.org/LocalBusiness). Define each local
+ business location as a `LocalBusiness` type. Use
+ the [most specific `LocalBusiness` sub-type possible](https://schema.org/LocalBusiness#subtypes); for example, `Restaurant`, `DaySpa`, `HealthClub`, and
+ so on.
+
+> [!IMPORTANT]
+> Since
+>
+> [`LocalBusiness`](https://schema.org/LocalBusiness)
+>
+> is
+>  a subtype of
+>
+> [`Organization`](https://schema.org/Organization)
+>
+> , we
+>  recommend following the fields for
+>
+> [Organization](https://developers.google.com/search/docs/appearance/structured-data/organization)
+>
+> in addition to the fields required and recommended below.
+
+If you have multiple types, specify them as an array (`additionalType` isn't
+ supported). For example, if your business offers multiple services:
+
+```
+{
+
+  
+"@context"
+:
+ 
+"https://schema.org"
+,
+
+  
+"@type"
+:
+ 
+[
+"Electrician"
+,
+ 
+"Plumber"
+,
+ 
+"Locksmith"
+],
+
+  
+...
+.
+
+}
+```
+
+The Google-supported properties are the following:
+
+| Required properties |  |
+| --- | --- |
+| address | PostalAddress The physical location of the business. Include as many properties as possible. The more
+ properties you provide, the higher quality the result is to users. For example: "address" : { "@type" : "PostalAddress" , "streetAddress" : "148 W 51st St Suit 42 Unit 7" , "addressLocality" : "New York" , "addressRegion" : "NY" , "postalCode" : "10019" , "addressCountry" : "US" } |
+| name | Text The name of the business. |
+
+| Recommended properties |  |
+| --- | --- |
+| aggregateRating | AggregateRating This property is only recommended for sites that capture reviews about other local businesses : The average rating of
+ the local business based on multiple ratings or reviews. Follow the Review snippet
+ guidelines and the list of required and recommended aggregate
+ rating properties . |
+| department | LocalBusiness A nested item for a single department. You can define any of the
+ properties in this table for a department. Additional guidelines: Include the store name with the department name in the following
+ format: {store name} {department name} . For example, gMart and gMart Pharmacy . If the department name is explicitly branded, specify a department name by itself. For
+ example: Best Buy and Geek Squad . |
+| geo | GeoCoordinates Geographic coordinates of the business. |
+| geo.latitude | Number The latitude of the business location. The precision must be at least 5
+ decimal places. |
+| geo.longitude | Number The longitude of the business location. The precision must be at least 5
+ decimal places. |
+| menu | URL For food establishments, the fully-qualified URL of the menu. |
+| openingHoursSpecification | Array or single object (both supported) of OpeningHoursSpecification Hours during which the business location is open. |
+| openingHoursSpecification.closes | Time The time the business location closes, in hh:mm:ss format. |
+| openingHoursSpecification.dayOfWeek | DayOfWeek One or more of the following values: https://schema.org/Monday : The day known as Monday. https://schema.org/Tuesday : The day known as Tuesday. https://schema.org/Wednesday : The day known as Wednesday. https://schema.org/Thursday : The day known as Thursday. https://schema.org/Friday : The day known as Friday. https://schema.org/Saturday : The day known as Saturday. https://schema.org/Sunday : The day known as Sunday. We also support the short names without the URL prefix (for example, Monday ). |
+| openingHoursSpecification.opens | Time The time the business location opens, in hh:mm:ss format. |
+| openingHoursSpecification.validFrom | Date The start date of a seasonal business closure, in YYYY-MM-DD format. |
+| openingHoursSpecification.validThrough | Date The end date of a seasonal business closure, in YYYY-MM-DD format. |
+| priceRange | Text The relative price range of a business, commonly specified by either a numerical range
+ (for example, "$10-15") or a normalized number of currency signs (for example, "$$$"). This field must be shorter than 100 characters. If it's 100 characters or longer, Google
+ won't show a price range for the business. |
+| review | Review This property is only recommended for sites that capture reviews about other local businesses : A review of the local business. Follow the Review snippet
+ guidelines and the list of required and recommended review
+ properties . |
+| servesCuisine | servesCuisine The type of cuisine the restaurant serves. |
+| telephone | Text A business phone number meant to be the primary contact method for customers.
+ Be sure to include the country code and area code in the phone number. |
+| url | URL The fully-qualified URL of the specific business location. The URL must be a working link. |
+
+### Restaurant carousel (limited access)
+
+> [!NOTE]
+> The Restaurant carousel is currently limited to a small set of restaurant providers.
+>  If you would like to participate,
+>
+> [register your interest](https://docs.google.com/a/google.com/forms/d/e/1FAIpQLSdZCJXAe2TtpiBe8Lx2dWR6LatLcCbFq7SZsyWqH6xJ7ulbaQ/viewform)
+>
+> in our form.
+
+If you have multiple restaurants listed on your site, and you want them to be eligible for a
+ host carousel, add the Carousel object. In addition to the [standard Carousel properties](https://developers.google.com/search/docs/appearance/structured-data/carousel), define the following properties in your Carousel object. While carousel properties
+ aren't required, you must add the following properties if you want your restaurant list to be
+ eligible for a host carousel.
+
+The Google-supported properties are the following:
+
+| Required properties |  |
+| --- | --- |
+| image | Repeated URL or ImageObject One or more images of the restaurant. Additional image guidelines: Image URLs must be crawlable and indexable. To check if Google can access your URLs, use
+ the URL Inspection tool . Images must represent the marked up content. Images must be in a file format that's supported by Google Images . For best results, we recommend providing multiple high-resolution images (minimum of 50K pixels when
+ multiplying width and height) with the following aspect ratios: 16x9, 4x3, and 1x1. For example: "image": [
+ "https://example.com/photos/1x1/photo.jpg",
+ "https://example.com/photos/4x3/photo.jpg",
+ "https://example.com/photos/16x9/photo.jpg"
+] |
+| name | Text The name of the restaurant. |
+
+| Recommended properties |  |
+| --- | --- |
+| address | PostalAddress The physical location of the business. Include as many properties as possible. The more
+ properties you provide, the higher quality the result is to users. For example: "address" : { "@type" : "PostalAddress" , "streetAddress" : "148 W 51st St" , "addressLocality" : "New York" , "addressRegion" : "NY" , "postalCode" : "10019" , "addressCountry" : "US" } |
+| servesCuisine | servesCuisine The type of cuisine the restaurant serves. |
+
+## Troubleshooting
+
+If you're having trouble implementing or debugging structured data, here are some resources that
+ may help you.
+
+- If you're using a content management system (CMS) or someone else is taking care of your site,
+ ask them to help you. Make sure to forward any Search Console message that details the issue to them.
+- Google does not guarantee that features that consume structured data will show up in search results.
+ For a list of common reasons why Google may not show your content in a rich result, see the [General Structured Data Guidelines](https://developers.google.com/search/docs/appearance/structured-data/sd-policies) .
+- You might have an error in your structured data. Check the [list of structured data errors](https://support.google.com/webmasters/answer/13300873) and the [Unparsable structured data report](https://support.google.com/webmasters/answer/9166415) .
+- If you received a structured data manual action against your page, the structured data on
+ the page will be ignored (although the page can still appear in Google Search results). To fix [structured data issues](https://support.google.com/webmasters/answer/9044175#zippy=%2Cstructured-data-issue) , use the [Manual Actions report](https://support.google.com/webmasters/answer/9044175) .
+- Review the guidelines again to identify if your content isn't compliant
+ with the guidelines. The problem can be caused by either spammy content or spammy markup usage.
+ However, the issue may not be a syntax issue, and so the Rich Results Test won't be able to
+ identify these issues.
+- [Troubleshoot missing rich results / drop in total rich results](https://support.google.com/webmasters/answer/13300208) .
+- Allow time for re-crawling and re-indexing. Remember that it may take several days after
+ publishing a page for Google to find and crawl it. For general questions about crawling and indexing, check the [Google Search crawling and indexing FAQ](https://developers.google.com/search/help/crawling-index-faq) .
+- Post a question in the [Google Search Central forum](https://support.google.com/webmasters/community) .
